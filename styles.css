@@ -57,3 +57,8 @@ li {
 .search-form {
   margin-bottom: 20px;
 }
+.done-by {
+  position: relative;
+  right: -90px;
+  top: -15px;
+}
