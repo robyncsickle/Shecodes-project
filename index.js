@@ -27,7 +27,6 @@ function createDate(date) {
 let h2 = document.querySelector("#date");
 h2.innerHTML = `${createDate(currentTime)} ${currentHour}:${currentMinutes}`;
 
-//Change this so that the city will show on the page instead of being logged to console
 function searchEngine(event) {
   event.preventDefault();
   let cityInputElement = document.querySelector("#city-input");
@@ -38,12 +37,16 @@ let form = document.querySelector("#search-form");
 form.addEventListener("submit", searchEngine);
 
 function showCurrentCity(response) {
-  let temperature = Math.round(response.data.main.temp);
-  let newTemperature = document.querySelector("#main-day");
-  newTemperature.innerHTML = `${temperature}`;
-  let city = response.data.name;
-  let cityName = document.querySelector("#city-name");
-  cityName.innerHTML = `${city}`;
+  document.querySelector("#main-day").innerHTML = Math.round(
+    response.data.main.temp
+  );
+  document.querySelector("#city-name").innerHTML = response.data.name;
+  document.querySelector("#humidity").innerHTML = response.data.main.humidity;
+  document.querySelector("#wind").innerHTML = Math.round(
+    response.data.wind.speed
+  );
+  document.querySelector("#discribtion").innerHTML =
+    response.data.weather[0].main;
 }
 
 function searchCity(city) {
@@ -51,3 +54,19 @@ function searchCity(city) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(showCurrentCity);
 }
+
+function searchLocation(position) {
+  let lat = position.coords.latitude;
+  let long = position.coords.longitude;
+  let apiKey = "5d55b95d0c36fece015dcc6a56ce0686";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(showCurrentCity);
+}
+
+function showCurrentLocation(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(searchLocation);
+}
+
+let currentLocationButton = document.querySelector("#current-location-button");
+currentLocationButton.addEventListener("click", showCurrentLocation);

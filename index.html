@@ -19,7 +19,7 @@
       <div class="weather-app">
         <form id="search-form" class="search-form">
           <div class="row">
-            <div class="col-9">
+            <div class="col-6">
               <input
                 id="city-input"
                 type="search"
@@ -33,15 +33,23 @@
               <input
                 type="submit"
                 value="Search"
-                class="form-control btn btn-primary shadow-sm"
+                class="form-control btn btn-primary shadow-sm w-100"
               />
+            </div>
+            <div class="col-3">
+              <button
+                class="btn btn-success w-100"
+                id="current-location-button"
+              >
+                Current
+              </button>
             </div>
           </div>
         </form>
         <h1 id="city-name">Cape Town, South Africa</h1>
         <ul>
           <li id="date">Wednesday 22:00</li>
-          <li>Partly Cloudy</li>
+          <li id="discribtion">Partly Cloudy</li>
         </ul>
         <div class="row">
           <div class="col-6">
@@ -62,9 +70,8 @@
           </div>
           <div class="col-6">
             <ul>
-              <li>Precipitation: 0%</li>
-              <li>Humidity: 77%</li>
-              <li>Wind: 8 km/h</li>
+              <li>Humidity: <span id="humidity">77% </span></li>
+              <li>Wind: <span id="wind">8</span> km/h</li>
             </ul>
           </div>
         </div>
